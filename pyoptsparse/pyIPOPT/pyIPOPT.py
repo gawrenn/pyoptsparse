@@ -24,12 +24,11 @@ class IPOPT(Optimizer):
     IPOPT Optimizer Class - Inherited from Optimizer Abstract Class
     """
 
-    def __init__(self, raiseError=True, options=None):
+    def __init__(self, raiseError=True, options={}):
         """
         IPOPT Optimizer Class Initialization
         """
-        if options is None:
-            options = {}
+
         name = "IPOPT"
         category = "Local Optimizer"
         defOpts = self._getDefaultOptions()

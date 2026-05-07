@@ -8,9 +8,7 @@ except ImportError as e:
 
     def make_cls(e):
         class ParOpt(Optimizer):
-            def __init__(self, raiseError=True, options=None):
-                if options is None:
-                    options = {}
+            def __init__(self, raiseError=True, options={}):
                 name = "ParOpt"
                 category = "Local Optimizer"
                 self.defOpts = {}

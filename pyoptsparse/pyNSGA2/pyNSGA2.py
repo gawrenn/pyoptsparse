@@ -25,9 +25,7 @@ class NSGA2(Optimizer):
     NSGA2 Optimizer Class - Inherited from Optimizer Abstract Class
     """
 
-    def __init__(self, raiseError=True, options=None):
-        if options is None:
-            options = {}
+    def __init__(self, raiseError=True, options={}):
         name = "NSGA-II"
         category = "Global Optimizer"
         defOpts = self._getDefaultOptions()

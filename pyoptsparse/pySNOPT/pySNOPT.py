@@ -43,9 +43,7 @@ class SNOPT(Optimizer):
     SNOPT Optimizer Class
     """
 
-    def __init__(self, raiseError=True, options: Optional[Dict] = None):
-        if options is None:
-            options = {}
+    def __init__(self, raiseError=True, options: Dict = {}):
         name = "SNOPT"
         category = "Local Optimizer"
         defOpts = self._getDefaultOptions()

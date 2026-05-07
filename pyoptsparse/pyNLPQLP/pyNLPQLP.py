@@ -26,9 +26,7 @@ class NLPQLP(Optimizer):
     NLPQL Optimizer Class - Inherited from Optimizer Abstract Class
     """
 
-    def __init__(self, raiseError=True, options=None):
-        if options is None:
-            options = {}
+    def __init__(self, raiseError=True, options={}):
         name = "NLPQLP"
         category = "Local Optimizer"
         defOpts = self._getDefaultOptions()

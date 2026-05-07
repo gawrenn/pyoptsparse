@@ -25,9 +25,7 @@ class PSQP(Optimizer):
     PSQP Optimizer Class - Inherited from Optimizer Abstract Class
     """
 
-    def __init__(self, raiseError=True, options=None):
-        if options is None:
-            options = {}
+    def __init__(self, raiseError=True, options={}):
         name = "PSQP"
         category = "Local Optimizer"
         defOpts = self._getDefaultOptions()
