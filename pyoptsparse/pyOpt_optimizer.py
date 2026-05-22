@@ -584,9 +584,11 @@ class Optimizer(BaseSolver):
         # timing
         hist["time"] = time.time() - self.startTime
 
-        # Save information about major iteration counting (only matters for SNOPT and IPOPT).
-        if self.name in ["SNOPT", "IPOPT"]:
-            hist["isMajor"] = False  # this will be updated in _snstop or cyipopt's `intermediate` if it is major
+        # Save information about major iteration counting (only matters for SNOPT, IPOPT and Uno).
+        if self.name in ["SNOPT", "IPOPT", "Uno"]:
+            hist["isMajor"] = (
+                False  # this will be updated in _snstop, cyipopt's `intermediate`, or Uno's notify callback if it is major
+            )
         else:
             hist["isMajor"] = True  # for other optimizers we assume everything's major
 
@@ -968,7 +970,7 @@ class Optimizer(BaseSolver):
 # =============================================================================
 
 # List of optimizers as an enum
-Optimizers = Enum("Optimizers", "SNOPT IPOPT SLSQP NLPQLP CONMIN NSGA2 PSQP ALPSO ParOpt")
+Optimizers = Enum("Optimizers", "SNOPT IPOPT Uno SLSQP NLPQLP CONMIN NSGA2 PSQP ALPSO ParOpt")
 """Special enum containing all possible optimizers"""
 
 
@@ -999,6 +1001,8 @@ def OPT(optName, *args, **kwargs) -> Optimizer:
         from .pySNOPT.pySNOPT import SNOPT as opt
     elif optName == "ipopt" or optName == Optimizers.IPOPT:
         from .pyIPOPT.pyIPOPT import IPOPT as opt
+    elif optName == "uno" or optName == Optimizers.Uno:
+        from .pyUno.pyUno import Uno as opt
     elif optName == "slsqp" or optName == Optimizers.SLSQP:
         from .pySLSQP.pySLSQP import SLSQP as opt
     elif optName == "nlpqlp" or optName == Optimizers.NLPQLP:

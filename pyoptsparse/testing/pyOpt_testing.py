@@ -56,13 +56,14 @@ OUTPUT_FILENAMES = {
     "ParOpt": {"output_file": ".out", "tr_output_file": ".tr", "mma_output_file": ".mma"},
     "ALPSO": {"filename": ".out"},
     "NSGA2": {},
+    "Uno": {"logger_stream": ".out"},
 }
 
 # these are optimizers which are installed by default
 DEFAULT_OPTIMIZERS = {"SLSQP", "PSQP", "CONMIN", "ALPSO", "NSGA2"}
 
 # Define gradient-based optimizers
-GRAD_BASED_OPTIMIZERS = {"CONMIN", "IPOPT", "NLPQLP", "ParOpt", "PSQP", "SLSQP", "SNOPT"}
+GRAD_BASED_OPTIMIZERS = {"CONMIN", "IPOPT", "NLPQLP", "ParOpt", "PSQP", "SLSQP", "SNOPT", "Uno"}
 
 
 class OptTest(unittest.TestCase):
@@ -178,6 +179,8 @@ class OptTest(unittest.TestCase):
         A general helper function to set a default output file name in optOptions
         based on the optimizer and test method name.
 
+        If the output file name option is already set in optOptions, it is left unchanged.
+
         Parameters
         ----------
         optOptions : dict
@@ -192,7 +195,8 @@ class OptTest(unittest.TestCase):
         for optionName, suffix in OUTPUT_FILENAMES[self.optName].items():
             # self.id() is provided by unittest.TestCase automatically
             # which is an unambiguous identifier
-            optOptions[optionName] = f"{self.id()}{suffix}"
+            if optionName not in optOptions:
+                optOptions[optionName] = f"{self.id()}{suffix}"
         return optOptions
 
     def optimize(self, sens=None, setDV=None, optOptions=None, storeHistory=False, hotStart=False):

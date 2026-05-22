@@ -1,4 +1,4 @@
-__version__ = "2.15.1"
+__version__ = "2.16.0"
 
 from .pyOpt_history import History
 from .pyOpt_variable import Variable
@@ -13,6 +13,7 @@ from . import testing
 # Now import all the individual optimizers
 from .pySNOPT.pySNOPT import SNOPT
 from .pyIPOPT.pyIPOPT import IPOPT
+from .pyUno.pyUno import Uno
 from .pySLSQP.pySLSQP import SLSQP
 from .pyCONMIN.pyCONMIN import CONMIN
 from .pyPSQP.pyPSQP import PSQP
@@ -34,6 +35,7 @@ __all__ = [
     "Solution",
     "SNOPT",
     "IPOPT",
+    "Uno",
     "SLSQP",
     "CONMIN",
     "PSQP",
